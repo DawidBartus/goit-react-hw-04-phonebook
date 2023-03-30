@@ -6,7 +6,7 @@ import ContactList from './ContactList/ContactList';
 const App = () => {
   const [contacts, setContact] = useState([]);
   const [filter, setFilter] = useState('');
-  const isUpdated = useRef(false);
+  const storageRef = useRef(false);
 
   useEffect(() => {
     const parseLocalContacts = JSON.parse(localStorage.getItem('contacts'));
@@ -14,10 +14,10 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    if (isUpdated.current) {
+    if (storageRef.current) {
       localStorage.setItem('contacts', JSON.stringify(contacts));
     } else {
-      isUpdated.current = true;
+      storageRef.current = true;
     }
   }, [contacts]);
 
